@@ -95,7 +95,7 @@ app.post("/register", async (req,res)=>{
      const dahsboard =(req,res)=>{
         // res.send("THIS THE DASHBOARD PAGE FOR MUSUNURU "+req.body.musu);
                 // res.send("THIS THE DASHBOARD PAGE FOR MUSUNURU ");
-                res.sendFile('./views/dashboard.html', { root: __dirname });
+                res.sendFile('./views/search.html', { root: __dirname });
 
 
     }
