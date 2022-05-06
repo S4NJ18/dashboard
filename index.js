@@ -7,8 +7,6 @@ const users = require("./model/user")
 const app = express();
 const port = 3000;
 
-app.use(session({secret: 'sanjib',saveUninitialized: true,resave: true}));
-
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -16,8 +14,6 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use(express.json());
 app.set('view engine', 'ejs');
-
-var sess;
 
 
 app.get("/register", (req, res) => {
@@ -103,7 +99,7 @@ app.post("/register", async (req,res)=>{
 
 
     }
-    
+
     
     
     
