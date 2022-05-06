@@ -7,31 +7,40 @@ const users = require("./model/user")
 const app = express();
 const port = 3000;
 
+app.use(session({secret: 'sanjib',saveUninitialized: true,resave: true}));
+
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: false }))
 
 app.use(express.json());
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
+
+var sess;
 
 
-app.get("/signup", (req, res) => {
+app.get("/register", (req, res) => {
 
-    res.sendFile('./views/signup.html', { root: __dirname });
+    res.sendFile('./views/register.html', { root: __dirname });
 
 
 
 });
 
-app.post("/signup", async (req,res)=>{
+app.post("/register", async (req,res)=>{
 
     
     console.log(req.body)
     try{
         const user = new users({
-             username:req.body.username,
-             password:req.body.pass
+            firstname:req.body.firstname,
+            lastname:req.body.lastname,
+            email:req.body.email,
+            password:req.body.pass
+
+            
+             
         })
         await user.save()
         res.status(201).json({
@@ -64,7 +73,7 @@ app.post("/signup", async (req,res)=>{
     
         try{
             const user = await users.findOne({ 
-                username:req.body.username,
+                email:req.body.email,
                  password:req.body.pass
            })
       
@@ -94,6 +103,7 @@ app.post("/signup", async (req,res)=>{
 
 
     }
+    
     
     
     
