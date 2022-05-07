@@ -39,10 +39,14 @@ app.post("/register", async (req,res)=>{
              
         })
         await user.save()
-        res.status(201).json({
-             status:true,
-             message:`user created with ID: ${user._id}`
-        })
+        // res.status(201).json({
+        //      status:true,
+        //      message:`user created with ID: ${user._id}`
+        // })
+
+        res.sendFile('./views/login.html' , { root: __dirname });
+
+
     }
     catch(error){
          res.status(500).json({
